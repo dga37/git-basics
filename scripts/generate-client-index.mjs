@@ -4,6 +4,14 @@ import { join } from "node:path";
 const clientDir = join(process.cwd(), "dist", "client");
 const assetsDir = join(clientDir, "assets");
 
+function normalizeBasePath(basePath) {
+  const trimmed = (basePath || "/").trim();
+  const withLeadingSlash = trimmed.startsWith("/") ? trimmed : `/${trimmed}`;
+  return withLeadingSlash.endsWith("/") ? withLeadingSlash : `${withLeadingSlash}/`;
+}
+
+const basePath = normalizeBasePath(process.env.SITE_BASE_PATH);
+
 const assetFiles = readdirSync(assetsDir);
 const cssFile = assetFiles.find((name) => /^styles-.*\.css$/.test(name));
 
@@ -57,16 +65,17 @@ const html = `<!doctype html>
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <base href="${basePath}" />
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
     <meta http-equiv="Pragma" content="no-cache" />
     <meta http-equiv="Expires" content="0" />
     <title>Portfolio</title>
-    <link rel="icon" href="placeholder.svg" />
-    <link rel="stylesheet" href="assets/${cssFile}" />
+    <link rel="icon" href="${basePath}placeholder.svg" />
+    <link rel="stylesheet" href="${basePath}assets/${cssFile}" />
   </head>
   <body>
     <div id="root"></div>
-    <script type="module" src="assets/${jsFile}"></script>
+    <script type="module" src="${basePath}assets/${jsFile}"></script>
   </body>
 </html>
 `;
