@@ -20,7 +20,7 @@ const withBase = (path: string) => {
 
 // Quick-edit section: update these values first for most profile/theme changes.
 const profile = {
-  name: "Sagun",
+  name: "Durga",
   role: "Full Stack Developer",
   location: "Nepal",
   email: "hello@sagun.dev",
@@ -35,10 +35,9 @@ const socialLinks = {
 };
 
 // Single source of truth for brand hue.
-// Change this one value to retheme all accent-driven UI parts.
-// Switched to a bluish-white direction per user request.
-const brandColor = "oklch(0.62 0.24 25)";
-const brandTextOnColor = "oklch(0.99 0.01 20)";
+// Changed to a pink palette per user preference.
+const brandColor = "oklch(0.65 0.20 330)";
+const brandTextOnColor = "oklch(0.99 0.01 330)";
 
 const themeColors = {
   // Keep overrides minimal: all other tokens are derived from these in styles.css.
